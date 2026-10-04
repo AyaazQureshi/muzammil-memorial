@@ -1,0 +1,64 @@
+@import '@fontsource-variable/manrope';
+@import '@fontsource-variable/newsreader';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper font-sans text-[17px] leading-7 text-ink antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-serif font-medium tracking-tight text-ink;
+  }
+  :focus-visible {
+    outline: 2px solid #2b3f5c;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .btn {
+    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition-colors duration-200;
+  }
+  .btn-primary {
+    @apply btn bg-navy text-paper hover:bg-navy-dark;
+  }
+  .btn-secondary {
+    @apply btn border border-navy/30 bg-transparent text-navy hover:bg-navy-soft;
+  }
+  .section-title {
+    @apply text-3xl leading-tight sm:text-4xl;
+  }
+  .prose-memorial p {
+    @apply max-w-[62ch] font-serif text-[1.2rem] leading-[1.8] text-ink/90;
+  }
+}
+
+/* Gentle reveal on scroll. Only active when JS is running and motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
